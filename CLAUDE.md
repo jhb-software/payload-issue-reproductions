@@ -52,6 +52,7 @@ https://github.com/jhb-software/payload-reproductions/tree/main/<folder>/
 2. Add all required files (see above), including `ISSUE.md`
 3. Push to this repo (`main`)
 4. Open a Payload GitHub issue, paste content of `ISSUE.md`, link to the folder
+5. After the Payload issue is created: add the issue link to the root `README.md` table — keep it always up to date
 
 ## Issues
 
