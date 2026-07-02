@@ -4,27 +4,19 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 
+import { Pages } from './collections/Pages'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  secret: 'repro-secret',
-  db: sqliteAdapter({
-    client: { url: 'file:./repro.db' },
-  }),
-  collections: [
-    {
-      slug: 'pages',
-      fields: [
-        {
-          name: 'content',
-          type: 'richText',
-          editor: lexicalEditor({}),
-        },
-      ],
-    },
-  ],
+  collections: [Pages],
+  editor: lexicalEditor(),
+  secret: 'repro-secret-do-not-use-in-production',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
+  db: sqliteAdapter({
+    client: { url: 'file:./repro.db' },
+  }),
 })

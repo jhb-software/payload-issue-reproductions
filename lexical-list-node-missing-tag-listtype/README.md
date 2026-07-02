@@ -1,46 +1,44 @@
-# Reproduction: Lexical list node missing `tag` and `listType` when inserted via API
+# Lexical list node missing `tag` and `listType` when saved via API
 
-## Issue
+## Summary
 
-When a Lexical list node is inserted programmatically via the Payload REST API (or local API), the resulting node is missing the `tag` and `listType` fields that the Lexical editor normally populates automatically.
+When a `list` node is saved to a Lexical rich text field via the Payload REST or local API
+**without** `tag` and `listType` fields, Payload stores it as-is — no validation, no defaults.
 
-This causes rendering to fail in any renderer that reads `node.tag` directly (e.g. `const Tag = node.tag` → `<Tag>...</Tag>` → crash when `Tag` is `undefined`).
+The Lexical editor always populates these fields on insert, so this only surfaces when content
+is created or updated programmatically (e.g. via MCP tools, migration scripts, or REST clients).
+
+Downstream renderers that use `node.tag` directly (e.g. `const Tag = node.tag; <Tag>...</Tag>`)
+crash at build time:
+
+```
+Unable to render Tag because it is undefined!
+```
 
 ## Expected behavior
 
-A list node should always have `tag` (`"ul"` or `"ol"`) and `listType` (`"bullet"`, `"number"`, or `"check"`), regardless of whether it was created via the editor UI or the API.
+Payload should either:
+- **Default** `tag` to `"ul"` and `listType` to `"bullet"` when these fields are absent on a list node (same as what the Lexical editor does), or
+- **Reject** the document with a validation error so the caller knows the node is malformed.
 
 ## Actual behavior
 
-```json
-{
-  "type": "list",
-  "version": 1,
-  "format": "",
-  "indent": 0,
-  "direction": "ltr",
-  "children": [{ "type": "listitem", "version": 1, "value": 1, "checked": false, "indent": 0, "direction": "ltr", "children": [] }]
-}
-```
-
-Note: `tag` and `listType` are absent. The Lexical editor always adds these, but the API does not validate or default them.
+The node is stored without `tag` and `listType`. Reads return the malformed node, causing
+renderers to crash.
 
 ## Steps to reproduce
 
-1. Install dependencies: `pnpm install`
-2. Start Payload: `pnpm dev`
-3. Run the reproduction script: `pnpm repro`
+```bash
+git clone https://github.com/payloadcms/payload
+cd payload
+# copy config.ts and int.spec.ts into test/_community/
+pnpm dev:generate-types _community
+pnpm test:int _community
+```
 
-The script creates a document with a rich text field containing a list node (no `tag`/`listType`) via the Payload local API, then reads it back and prints the stored node.
+The test in `int.spec.ts` fails, confirming the missing fields.
 
 ## Environment
 
-- Payload CMS: latest
+- Payload: latest
 - `@payloadcms/richtext-lexical`: latest
-- Node.js: 20+
-
-## Workaround
-
-Add a default in the renderer: `const Tag = node.tag ?? 'ul'`. This is defensive but does not fix the root cause (malformed data in the DB).
-
-The correct fix is for Payload to validate or default `tag` and `listType` on list nodes before saving, similar to how the Lexical editor normalizes them on insert.
