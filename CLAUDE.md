@@ -22,6 +22,8 @@ Each reproduction folder must contain:
 
 ## ISSUE.md format
 
+No H1 (`#`) at the top — GitHub uses the issue title field separately. Start directly with `## Describe the Bug`.
+
 ```markdown
 ## Describe the Bug
 

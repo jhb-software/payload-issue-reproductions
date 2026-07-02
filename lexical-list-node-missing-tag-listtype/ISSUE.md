@@ -1,5 +1,3 @@
-# Payload Issue: Lexical list node missing `tag` and `listType` when saved via API
-
 ## Describe the Bug
 
 When a `list` node is saved to a Lexical rich text field via the Payload REST or local API **without** the `tag` and `listType` fields, Payload stores the node as-is — no validation, no defaults.
