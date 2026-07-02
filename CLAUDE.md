@@ -52,6 +52,7 @@ https://github.com/jhb-software/payload-reproductions/tree/main/<folder>/
 2. Add all required files (see above), including `ISSUE.md`
 3. Push to this repo (`main`)
 4. **STOP — human review required before filing:** show Jens the `ISSUE.md` and confirm he approves it
+   - Before approval: verify `ISSUE.md` matches the Payload issue template exactly (all 5 required fields: Describe the Bug, Link, Reproduction Steps, Area, Environment Info)
 5. Open the Payload GitHub issue only after explicit approval
 6. After the Payload issue is created: add the issue link to the root `README.md` table — keep it always up to date
 
