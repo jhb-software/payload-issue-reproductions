@@ -37,7 +37,12 @@ Binaries:
 Relevant Packages:
   payload: 3.85.1
   @payloadcms/richtext-lexical: 3.85.1
+  @payloadcms/db-sqlite: 3.85.1
   next: 15.5.19
+
+Operating System:
+  Platform: linux
+  Arch: x64
 ```
 
 ## Additional Context
