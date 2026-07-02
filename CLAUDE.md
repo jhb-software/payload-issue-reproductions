@@ -12,7 +12,7 @@ Payload's preferred format: use `pnpx create-payload-app@latest -t blank` as a b
 - [Reproduction guide](https://github.com/payloadcms/payload/blob/main/.github/reproduction-guide.md)
 
 Each reproduction folder must contain:
-- `issue.md` — filled out in the Payload issue template format (see below)
+- `ISSUE.md` — filled out in the Payload issue template format (see below)
 - `src/payload.config.ts` — minimal Payload config (based on blank template, SQLite)
 - `src/collections/` — only the collections needed to reproduce the issue
 - `tests/int.spec.ts` — vitest test that **fails** to prove the bug
@@ -20,7 +20,7 @@ Each reproduction folder must contain:
 - `vitest.config.mts`, `tsconfig.json`, `package.json`, `.env.example`
 - `README.md` — short description + steps to reproduce
 
-## issue.md format
+## ISSUE.md format
 
 ```markdown
 ## Describe the Bug
@@ -49,9 +49,9 @@ https://github.com/jhb-software/payload-reproductions/tree/main/<folder>/
 ## Workflow
 
 1. Create a folder: `<short-description>/`
-2. Add all required files (see above), including `issue.md`
+2. Add all required files (see above), including `ISSUE.md`
 3. Push to this repo (`main`)
-4. Open a Payload GitHub issue, paste content of `issue.md`, link to the folder
+4. Open a Payload GitHub issue, paste content of `ISSUE.md`, link to the folder
 
 ## Issues
 
