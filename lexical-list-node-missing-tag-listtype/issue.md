@@ -12,11 +12,11 @@ Note: `listNodeJSONSchema` already declares `tag`, `listType`, and `start` as **
 
 ## Link to the code that reproduces this issue
 
-https://github.com/jhb-software/payload-reproductions/tree/main/lexical-list-node-missing-tag-listtype/
+https://github.com/jhb-software/payload-issue-reproductions/tree/main/lexical-list-node-missing-tag-listtype/
 
 ## Reproduction Steps
 
-1. Clone https://github.com/jhb-software/payload-reproductions
+1. Clone https://github.com/jhb-software/payload-issue-reproductions
 2. `cd lexical-list-node-missing-tag-listtype`
 3. `pnpm install`
 4. `pnpm test:int`
