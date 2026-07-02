@@ -6,12 +6,7 @@ When a `list` node is saved to a Lexical rich text field via the Payload REST or
 
 The Lexical editor always populates these fields on insert. But programmatic API callers (AI agents, MCP tools, migration scripts, REST clients) often don't include them, resulting in malformed data silently persisted to the database.
 
-Downstream renderers that read `node.tag` directly crash at build time:
-
-```
-Unable to render Tag because it is undefined!
-Did you forget to import the component or is it possible there is a typo?
-```
+Because the required fields are missing, any renderer that reads `node.tag` or `node.listType` directly will fail or produce incorrect output. The exact error depends on the renderer.
 
 Note: `listNodeJSONSchema` already declares `tag`, `listType`, and `start` as **required** — but this schema is only used for TypeScript type generation, not for runtime validation at the API layer.
 
