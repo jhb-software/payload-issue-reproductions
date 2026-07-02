@@ -1,0 +1,21 @@
+{
+  "name": "lexical-list-node-missing-tag-listtype",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "repro": "node --experimental-vm-modules repro.mjs"
+  },
+  "dependencies": {
+    "@payloadcms/db-sqlite": "latest",
+    "@payloadcms/next": "latest",
+    "@payloadcms/richtext-lexical": "latest",
+    "next": "^15.0.0",
+    "payload": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}
