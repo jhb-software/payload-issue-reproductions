@@ -8,4 +8,4 @@ Each folder is a self-contained reproduction linked from the corresponding Paylo
 
 | Folder | Issue | Status |
 |--------|-------|--------|
-| [lexical-list-node-missing-tag-listtype](./lexical-list-node-missing-tag-listtype/) | TBD | ready to file |
+| [lexical-list-node-missing-tag-listtype](./lexical-list-node-missing-tag-listtype/) | [#17185](https://github.com/payloadcms/payload/issues/17185) | filed |
