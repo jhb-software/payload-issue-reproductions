@@ -1,44 +1,24 @@
-# Lexical list node missing `tag` and `listType` when saved via API
+# Reproduction: Lexical list node missing `tag` and `listType` when saved via API
 
-## Summary
+Minimal reproduction for a Payload CMS GitHub issue.
 
-When a `list` node is saved to a Lexical rich text field via the Payload REST or local API
-**without** `tag` and `listType` fields, Payload stores it as-is — no validation, no defaults.
+## The Bug
 
-The Lexical editor always populates these fields on insert, so this only surfaces when content
-is created or updated programmatically (e.g. via MCP tools, migration scripts, or REST clients).
+When a `list` node is saved to a Lexical rich text field via the Payload REST or local API **without** `tag` and `listType` fields, Payload stores it as-is — no validation, no defaults.
 
-Downstream renderers that use `node.tag` directly (e.g. `const Tag = node.tag; <Tag>...</Tag>`)
-crash at build time:
-
-```
-Unable to render Tag because it is undefined!
-```
-
-## Expected behavior
-
-Payload should either:
-- **Default** `tag` to `"ul"` and `listType` to `"bullet"` when these fields are absent on a list node (same as what the Lexical editor does), or
-- **Reject** the document with a validation error so the caller knows the node is malformed.
-
-## Actual behavior
-
-The node is stored without `tag` and `listType`. Reads return the malformed node, causing
-renderers to crash.
+The Lexical editor always sets these fields on insert. Programmatic callers (AI agents, MCP tools, REST clients, migration scripts) often don't — resulting in malformed data silently persisted to the database.
 
 ## Steps to reproduce
 
 ```bash
-git clone https://github.com/payloadcms/payload
-cd payload
-# copy config.ts and int.spec.ts into test/_community/
-pnpm dev:generate-types _community
-pnpm test:int _community
+pnpm install
+pnpm test:int
 ```
 
-The test in `int.spec.ts` fails, confirming the missing fields.
+The test in `tests/int.spec.ts` fails: `node.tag` and `node.listType` are `undefined` on the saved document.
 
 ## Environment
 
-- Payload: latest
-- `@payloadcms/richtext-lexical`: latest
+- payload: 3.85.1
+- @payloadcms/richtext-lexical: 3.85.1
+- Node: 24.16.0 / pnpm: 11.9.0
