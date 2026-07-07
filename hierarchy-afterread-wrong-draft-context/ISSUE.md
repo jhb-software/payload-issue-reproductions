@@ -17,17 +17,11 @@ This is incorrect. `doc._status` reflects whether **this specific document** has
 
 The user is in draft/preview mode and expects the entire path tree to reflect draft state, but `doc._status` only tells you about the document itself, not the request's intent.
 
-**Fix:** Use the request's draft intent instead of `doc._status`:
-
-```ts
-draft: doc._status === 'draft' || req.query?.draft === 'true',
-```
-
-Or ideally expose `draft` as a proper hook argument so both REST and local API callers can set it cleanly — see related issue: https://github.com/payloadcms/payload/issues/16180
+The root cause is that `draft` is not currently available as a hook argument, so there is no clean way to derive the request's draft intent from within `afterRead`. A proper fix requires exposing `draft` in the hook args — see: https://github.com/payloadcms/payload/issues/16180
 
 ## Link to the code that reproduces this issue
 
-https://github.com/jhb-software/payload-reproductions/tree/main/hierarchy-afterread-wrong-draft-context/
+https://github.com/jhb-software/payload-issue-reproductions/tree/main/hierarchy-afterread-wrong-draft-context/
 
 ## Reproduction Steps
 
