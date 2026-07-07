@@ -1,0 +1,26 @@
+{
+  "name": "hierarchy-afterread-wrong-draft-context",
+  "version": "1.0.0",
+  "description": "Reproduction: hierarchy afterRead hook uses doc._status instead of request draft intent",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
+  },
+  "dependencies": {
+    "@payloadcms/db-sqlite": "canary",
+    "cross-env": "^10.0.0",
+    "payload": "canary"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vite-tsconfig-paths": "^5.0.0",
+    "vitest": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.20.2",
+    "pnpm": ">=9"
+  }
+}
