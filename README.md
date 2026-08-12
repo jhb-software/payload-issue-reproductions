@@ -11,4 +11,4 @@ Each folder is a self-contained reproduction linked from the corresponding Paylo
 | [lexical-list-node-missing-tag-listtype](./lexical-list-node-missing-tag-listtype/) | [#17185](https://github.com/payloadcms/payload/issues/17185) | filed |
 | [hierarchy-afterread-wrong-draft-context](./hierarchy-afterread-wrong-draft-context/) | [#17223](https://github.com/payloadcms/payload/issues/17223) | filed |
 | [duplicate-upload-ignores-data-overrides](./duplicate-upload-ignores-data-overrides/) | [#17762](https://github.com/payloadcms/payload/issues/17762) | filed |
-| [lexical-link-picker-ignores-tenant-filter](./lexical-link-picker-ignores-tenant-filter/) | TBD | ready to file |
+| [lexical-link-picker-ignores-tenant-filter](./lexical-link-picker-ignores-tenant-filter/) | [#17765](https://github.com/payloadcms/payload/issues/17765) | filed |
