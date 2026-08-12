@@ -11,9 +11,9 @@ This is a regression: the test in this reproduction passes on `payload@3.70.0` a
 `uploads/generateFileData.ts` builds its return value from the *source document* instead of the incoming data when duplicating:
 
 ```ts
-const incomingFileData: Document = isDuplicating ? originalDoc : data // line 111
+const incomingFileData: Document = isDuplicating ? originalDoc : data // line 113
 // ...
-let newData = incomingFileData as T // line 173
+let newData = incomingFileData as T // line 175
 ```
 
 `collections/operations/create.ts` then overwrites `data` wholesale with that value:
@@ -26,9 +26,9 @@ const { data: newFileData, files: filesToUpload } = await generateFileData({
 data = newFileData // line 176
 ```
 
-Line 173 was changed from `let newData = data` to `let newData = incomingFileData as T` in d462f9bcf4 ("fix: full image urls stored in DB", #15089), first released in v3.71.0. Since `incomingFileData` is `originalDoc` while duplicating, the overrides never survive.
+Line 175 was changed from `let newData = data` to `let newData = incomingFileData as T` in d462f9bcf4 ("fix: full image urls stored in DB", #15089), first released in v3.71.0. Since `incomingFileData` is `originalDoc` while duplicating, the overrides never survive.
 
-Note that the early return at line 157 (`return { data: incomingFileData, files: [] }`) drops the overrides too, so simply reverting line 173 may not be the complete fix.
+Note that the early return at line 160 (`return { data: incomingFileData, files: [] }`) drops the overrides too, so simply reverting line 175 may not be the complete fix.
 
 **Impact**
 
