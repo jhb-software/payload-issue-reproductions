@@ -204,6 +204,8 @@ Either way, include the captured evidence — test failure output, console error
 
 Run `pnpm payload info` in the folder for the environment section.
 
+Never hard-wrap `ISSUE.md` prose. GitHub renders a single newline in an issue body as a literal `<br>`, so wrapped paragraphs show up as ragged short lines instead of filling the width (this bit #18116). Write one line per paragraph and per list item, however long — unlike the repo's other Markdown files.
+
 ### Triage-bot rules — get these wrong and the issue is auto-flagged
 
 Payload's `.github/workflows/triage.yml` parses the issue body by regex. It auto-applies
@@ -220,8 +222,11 @@ Payload's `.github/workflows/triage.yml` parses the issue body by regex. It auto
   `(Select all that apply)`** or any other suffix. The regex is
   `### Which area\(s\) are affected\?(.*)### Environment Info` and the entire captured block becomes
   the label text, so a suffix creates a garbage label instead of the canonical one.
-- Between that heading and `### Environment Info`, put **only canonical label names**, one per line
-  (e.g. `plugin: ecommerce`) — no checkboxes, no bullets, no prose.
+- Between that heading and `### Environment Info`, put **exactly one canonical label name**
+  (e.g. `plugin: ecommerce`) — no checkboxes, no bullets, no prose. **Never list two areas**: the bot
+  takes the whole captured block as a single label, so two lines become one garbage label
+  (`area: ui plugin: seo`, created on #18116). Pick the single most specific area and mention any
+  others in prose under "Describe the Bug". Outside contributors cannot remove labels afterwards.
 
 Canonical areas include: `area: core`, `area: ui`, `area: graphql`, `plugin: richtext-lexical`,
 `plugin: cloud-storage`, `plugin: multi-tenant`, `plugin: ecommerce`.
