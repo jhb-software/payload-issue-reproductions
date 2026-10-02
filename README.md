@@ -13,3 +13,4 @@ Each folder is a self-contained reproduction linked from the corresponding Paylo
 | [duplicate-upload-ignores-data-overrides](./duplicate-upload-ignores-data-overrides/) | [#17762](https://github.com/payloadcms/payload/issues/17762) | filed |
 | [lexical-link-picker-ignores-tenant-filter](./lexical-link-picker-ignores-tenant-filter/) | [#17765](https://github.com/payloadcms/payload/issues/17765) | filed |
 | [bulk-edit-drops-custom-field-values](./bulk-edit-drops-custom-field-values/) | [#18116](https://github.com/payloadcms/payload/issues/18116) | filed |
+| [stale-data-check-ignores-locale](./stale-data-check-ignores-locale/) | [#18451](https://github.com/payloadcms/payload/issues/18451) | filed |
