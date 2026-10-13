@@ -1,0 +1,25 @@
+{
+  "name": "single-locale-publish-leaks-stale-row-fields-v4",
+  "version": "1.0.0",
+  "description": "Reproduction: a single-locale publish pairs block and array rows by index, so a changed row inherits the stored row's fields",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
+  },
+  "dependencies": {
+    "@payloadcms/db-sqlite": "beta",
+    "cross-env": "^10.0.0",
+    "payload": "beta"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.0.0",
+    "vite-tsconfig-paths": "^5.0.0",
+    "vitest": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.20.2",
+    "pnpm": ">=9"
+  }
+}
