@@ -14,7 +14,7 @@ const existingItem = existingValue?.find((row) => row?.id && row.id === newItem.
 const blockData = existingValue?.find((row) => row?.id && row.id === newBlockData.id && row.blockType === newBlockData.blockType) || {}
 ```
 
-The same bug exists in v4 (`4.0.0-beta.0`), reported separately.
+The same bug exists in v4 (`4.0.0-beta.0`): #18678
 
 ## Link to the code that reproduces this issue
 
