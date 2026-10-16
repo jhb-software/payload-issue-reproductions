@@ -29,7 +29,7 @@ This is related to, but separate from, #18246 (a nested call with `req` and a **
 +      fallbackLocale: fallbackLocale ?? req?.fallbackLocale,
 ```
 
-The same bug exists in v3 (`createLocalReq`): [v3 issue]
+The same bug exists in v3 (`createLocalReq`): #18768
 
 ## Link to the code that reproduces this issue
 

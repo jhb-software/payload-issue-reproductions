@@ -17,3 +17,5 @@ Each folder is a self-contained reproduction linked from the corresponding Paylo
 | [conditional-tab-visibility-submitted-as-data](./conditional-tab-visibility-submitted-as-data/) | [#18452](https://github.com/payloadcms/payload/issues/18452) | filed |
 | [single-locale-publish-leaks-stale-row-fields](./single-locale-publish-leaks-stale-row-fields/) | [#18677](https://github.com/payloadcms/payload/issues/18677) | filed |
 | [single-locale-publish-leaks-stale-row-fields-v4](./single-locale-publish-leaks-stale-row-fields-v4/) | [#18678](https://github.com/payloadcms/payload/issues/18678) | filed |
+| [local-req-resets-request-fallback-locale](./local-req-resets-request-fallback-locale/) | [#18768](https://github.com/payloadcms/payload/issues/18768) | filed |
+| [local-req-resets-request-fallback-locale-v4](./local-req-resets-request-fallback-locale-v4/) | [#18769](https://github.com/payloadcms/payload/issues/18769) | filed |
