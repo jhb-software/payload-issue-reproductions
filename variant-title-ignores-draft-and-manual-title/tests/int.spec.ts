@@ -67,35 +67,29 @@ describe('variants collection title hook', () => {
     expect(reloaded.title).toBe('T-Shirt — Small')
   })
 
-  it('keeps a manually entered title on create', async () => {
-    const product = await createProduct()
-
-    // The field description says "This is populated by default", implying it can be set by hand
-    const variant = await payload.create({
-      collection: 'variants',
-      data: { _status: 'published', options: [small.id], product: product.id, title: 'Custom title' } as any,
-    })
-
-    // Expected: "Custom title"
-    // Actual: "Shirt — Small", the hook overwrites `title` whenever `options` is set
-    expect(variant.title).toBe('Custom title')
-  })
-
-  it('keeps a manually edited title on update', async () => {
+  it('marks the always-generated title field as read-only', async () => {
     const product = await createProduct()
     const variant = await payload.create({
       collection: 'variants',
       data: { _status: 'published', options: [small.id], product: product.id } as any,
     })
 
+    // An edit to the title is silently discarded: the hook regenerates it on every save
+    // (`options` is required, so it is always present)
     const updated = await payload.update({
       id: variant.id,
       collection: 'variants',
       data: { title: 'Edited title' },
     })
+    expect(updated.title).toBe('Shirt — Small')
 
-    // Expected: "Edited title"
-    // Actual: "Shirt — Small"
-    expect(updated.title).toBe('Edited title')
+    const titleField = payload.collections.variants.config.fields.find(
+      (field) => 'name' in field && field.name === 'title',
+    )
+
+    // Expected: the field is read-only, so the admin panel doesn't offer an edit that is thrown away
+    // Actual: the field is editable, and its description ("This is populated by default") suggests
+    // the generated value is only a default that can be overridden
+    expect(titleField?.admin?.readOnly).toBe(true)
   })
 })

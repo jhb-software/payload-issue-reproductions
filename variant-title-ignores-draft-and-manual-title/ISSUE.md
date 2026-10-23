@@ -1,12 +1,12 @@
 ## Describe the Bug
 
-The ecommerce plugin generates variant titles as `<product title> — <option labels>` in the variants collection's [`beforeChange` hook](https://github.com/payloadcms/payload/blob/v3.92.0/packages/plugin-ecommerce/src/collections/variants/createVariantsCollection/hooks/beforeChange.ts#L11-L47). The resulting title is wrong or can't be changed in three ways:
+The ecommerce plugin generates variant titles as `<product title> — <option labels>` in the variants collection's [`beforeChange` hook](https://github.com/payloadcms/payload/blob/v3.92.0/packages/plugin-ecommerce/src/collections/variants/createVariantsCollection/hooks/beforeChange.ts#L11-L47). The title is used as the variant's `useAsTitle`, so it is what editors see in the admin panel, and it goes stale or wrong in three ways:
 
-1. **It uses the published product, not the latest draft.** The hook loads the product with `findByID` without `draft: true`. Products have autosave drafts, so after renaming a product in the admin panel (without publishing yet), new variants still get the old product name.
-2. **It never updates when the product is renamed.** The title is only generated when the variant itself is saved, and the products collection has no hook that updates its variants. Renaming and publishing a product leaves every existing variant with the old name until each variant is re-saved.
-3. **It always overwrites `title`.** The hook sets `data.title` on every save where `options` is set, which is every save, since `options` is required. A manually entered title is discarded on create and on update. The [field description](https://github.com/payloadcms/payload/blob/v3.92.0/packages/plugin-ecommerce/src/collections/variants/createVariantsCollection/index.ts#L48) says "This is populated by default", which suggests it can be overridden, but the field can't be edited at all.
+1. **It uses the published product, not the latest draft.** The hook loads the product with `findByID` without `draft: true`. Products have autosave drafts, so after a product is renamed (or duplicated as "… (copy)" and renamed) without publishing, new variants still get the old product name.
+2. **It is not updated when the product is renamed.** The title is only generated when the variant itself is saved, and the products collection has no hook that updates its variants. Renaming a product leaves all its existing variants with the old name until each one is re-saved.
+3. **Edits to the title are silently discarded.** The hook overwrites `title` on every save (`options` is required, so it is always set), but the field is editable in the admin panel and its [description](https://github.com/payloadcms/payload/blob/v3.92.0/packages/plugin-ecommerce/src/collections/variants/createVariantsCollection/index.ts#L48) ("This is populated by default") suggests the generated value is only a default that can be overridden.
 
-Suggested fix: read the product with `draft: true`, only generate the title when it is empty (or when it still equals the previously generated title), and regenerate variant titles from a products `afterChange` hook when the product title changes.
+Since the title is always derived, it could read the product with `draft: true`, be regenerated from a products `afterChange` hook when the product title changes, and be `readOnly` with a description that says it is generated.
 
 This affects both v3 and v4: the same hook ships in `4.0.0-beta.4` and is on `main`, and neither has a products hook that updates variant titles.
 
@@ -18,7 +18,7 @@ https://github.com/jhb-software/payload-issue-reproductions/tree/main/variant-ti
 
 1. Clone this repo and open the `variant-title-ignores-draft-and-manual-title/` directory
 2. `pnpm install`
-3. `pnpm test:int`: all four tests fail. Each creates a published product "Shirt" with a "Size" variant type and a variant with the option "Small".
+3. `pnpm test:int`: all three tests fail. Each creates a published product "Shirt" with a "Size" variant type and a variant with the option "Small".
 
 ```
 × uses the latest draft of the product
@@ -27,12 +27,10 @@ https://github.com/jhb-software/payload-issue-reproductions/tree/main/variant-ti
 × updates the variant title when the product is renamed
     Expected: "T-Shirt — Small"
     Received: "Shirt — Small"
-× keeps a manually entered title on create
-    Expected: "Custom title"
-    Received: "Shirt — Small"
-× keeps a manually edited title on update
-    Expected: "Edited title"
-    Received: "Shirt — Small"
+× marks the always-generated title field as read-only
+    (updating the title to "Edited title" returns "Shirt — Small")
+    Expected: true
+    Received: undefined
 ```
 
 ## Which area(s) are affected?
