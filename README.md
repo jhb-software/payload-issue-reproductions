@@ -19,3 +19,4 @@ Each folder is a self-contained reproduction linked from the corresponding Paylo
 | [single-locale-publish-leaks-stale-row-fields-v4](./single-locale-publish-leaks-stale-row-fields-v4/) | [#18678](https://github.com/payloadcms/payload/issues/18678) | filed |
 | [local-req-resets-request-fallback-locale](./local-req-resets-request-fallback-locale/) | [#18768](https://github.com/payloadcms/payload/issues/18768) | filed |
 | [local-req-resets-request-fallback-locale-v4](./local-req-resets-request-fallback-locale-v4/) | [#18769](https://github.com/payloadcms/payload/issues/18769) | filed |
+| [stripe-adapter-metadata-exceeds-500-chars](./stripe-adapter-metadata-exceeds-500-chars/) | [#19017](https://github.com/payloadcms/payload/issues/19017) | filed |

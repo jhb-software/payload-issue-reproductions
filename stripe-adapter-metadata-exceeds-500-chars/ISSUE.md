@@ -12,6 +12,8 @@ Error: Metadata values can have up to 500 characters, but you passed in a value 
 
 `shippingAddress` is JSON-stringified into the metadata the same way. A typical address stays under the limit, but an unusually long one would hit the same error.
 
+This affects both v3 and v4: the same code ships in `4.0.0-beta.4` and is on `main`.
+
 ## Link to the code that reproduces this issue
 
 https://github.com/jhb-software/payload-issue-reproductions/tree/main/stripe-adapter-metadata-exceeds-500-chars/
