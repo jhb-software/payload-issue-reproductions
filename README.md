@@ -21,3 +21,5 @@ Each folder is a self-contained reproduction linked from the corresponding Paylo
 | [local-req-resets-request-fallback-locale-v4](./local-req-resets-request-fallback-locale-v4/) | [#18769](https://github.com/payloadcms/payload/issues/18769) | filed |
 | [stripe-adapter-metadata-exceeds-500-chars](./stripe-adapter-metadata-exceeds-500-chars/) | [#19017](https://github.com/payloadcms/payload/issues/19017) | filed |
 | [variant-title-ignores-draft-and-manual-title](./variant-title-ignores-draft-and-manual-title/) | [#19018](https://github.com/payloadcms/payload/issues/19018) | filed |
+| [variant-duplicate-check-ignores-drafts](./variant-duplicate-check-ignores-drafts/) | [#19020](https://github.com/payloadcms/payload/issues/19020) | filed |
+| [variant-options-validation-untranslated-keys](./variant-options-validation-untranslated-keys/) | [#19021](https://github.com/payloadcms/payload/issues/19021) | filed |
