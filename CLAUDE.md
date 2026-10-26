@@ -11,6 +11,10 @@ improvise a reproduction without it.
 > Every reproduction and every GitHub issue must be reviewed and approved by Jens before it is filed
 > publicly. Never open an issue autonomously.
 
+> A bug that affects both v3 and v4 gets a separate `-v4` reproduction and issue only if the root
+> cause or the fix differs between them. If both share the same root cause and fix, file one issue
+> and note in it that v4 is also affected.
+
 > This repo and the issues filed from it are public. Bugs found in private projects must be rebuilt
 > from generic primitives — no client or project names, no domain-specific slugs, no real data,
 > credentials, URLs, or screenshots of a private admin panel.

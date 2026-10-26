@@ -57,6 +57,15 @@ const columnName =
 
 (jsonpath compares strings lexicographically, which gives the correct order for ISO timestamps.)
 
+**v4 is also affected, and bug 1 is worse there.** `createJSONQuery` is unchanged in `4.0.0-beta.4`, `4.0.0-canary.39` and on `main`. I ran this reproduction against `4.0.0-beta.4` (with `overrideAccess: true`, since v4 enforces access control in the Local API) and all 6 tests fail. Because v4 adds `createdBy` / `updatedBy` relationships to every collection, every `find` has a `_rels` lateral join whose output column is named `data`. So any filter on a key of a JSON field named `data` is ambiguous, even on a collection with no other fields, and even with `equals`:
+
+```
+... left join lateral (select ... as "data" from "pages_rels" ...) "pages__rels" on true where jsonb_path_exists(data, '$.publishedAt[*] ? (@ == "2026-10-26T00:00:00.000Z")')
+error: column reference "data" is ambiguous
+```
+
+The same fix applies to both.
+
 ## Link to the code that reproduces this issue
 
 https://github.com/jhb-software/payload-issue-reproductions/tree/main/postgres-json-key-where-fails/
