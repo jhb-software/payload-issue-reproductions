@@ -23,3 +23,4 @@ Each folder is a self-contained reproduction linked from the corresponding Paylo
 | [variant-title-ignores-draft-and-manual-title](./variant-title-ignores-draft-and-manual-title/) | [#19018](https://github.com/payloadcms/payload/issues/19018) | filed |
 | [variant-duplicate-check-ignores-drafts](./variant-duplicate-check-ignores-drafts/) | [#19020](https://github.com/payloadcms/payload/issues/19020) | filed |
 | [variant-options-validation-untranslated-keys](./variant-options-validation-untranslated-keys/) | [#19021](https://github.com/payloadcms/payload/issues/19021) | filed |
+| [postgres-json-key-where-fails](./postgres-json-key-where-fails/) | [#19063](https://github.com/payloadcms/payload/issues/19063) | filed |
